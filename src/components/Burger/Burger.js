@@ -1,14 +1,26 @@
 import React from 'react';
 import classes from './Burger.module.css';
-import Ingredients from './Ingredients/Ingredients';
+import Ingredient from './Ingredient/Ingredient';
 
 const burger = props => {
+  const ingredientNames = Object.keys(props.ingredients);
+
+  const getIngredients = name => {
+    const quantity = props.ingredients[name];
+    const ingredients = [];
+    for (let i = 0; i < quantity; i++) {
+      ingredients.push(<Ingredient type={name} />);
+    }
+    return ingredients;
+  };
+
+  const ingredients = ingredientNames.flatMap(getIngredients);
+
   return (
     <div className={classes.Burger}>
-      <Ingredients type="bread-top" />
-      <Ingredients type="cheese" />
-      <Ingredients type="meat" />
-      <Ingredients type="bread-bottom" />
+      <Ingredient type="bread-top" />
+      {ingredients}
+      <Ingredient type="bread-bottom" />
     </div>
   );
 }
