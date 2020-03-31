@@ -9,12 +9,16 @@ const burger = props => {
     const quantity = props.ingredients[name];
     const ingredients = [];
     for (let i = 0; i < quantity; i++) {
-      ingredients.push(<Ingredient type={name} />);
+      ingredients.push(<Ingredient key={i} type={name} />);
     }
     return ingredients;
   };
 
-  const ingredients = ingredientNames.flatMap(getIngredients);
+  let ingredients = ingredientNames.flatMap(getIngredients);
+
+  if (!ingredients.length) {
+    ingredients = 'Please start adding ingredients!'
+  }
 
   return (
     <div className={classes.Burger}>
