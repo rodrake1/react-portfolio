@@ -11,9 +11,13 @@ const initialControls = [
 
 const controls = props => (
   <div className={classes.Controls}>
-    {initialControls.map(control => {
-      return <Control key={control.label} label={control.label} />
-    })}
+    {initialControls.map(control => (
+      <Control
+        key={control.label}
+        label={control.label}
+        onAdd={_ => props.onAddIngredient(control.type)}
+      />
+    ))}
   </div>
 );
 

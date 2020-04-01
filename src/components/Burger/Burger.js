@@ -9,7 +9,7 @@ const burger = props => {
     const quantity = props.ingredients[name];
     const ingredients = [];
     for (let i = 0; i < quantity; i++) {
-      ingredients.push(<Ingredient key={i} type={name} />);
+      ingredients.push(<Ingredient key={name + i} type={name} />);
     }
     return ingredients;
   };
