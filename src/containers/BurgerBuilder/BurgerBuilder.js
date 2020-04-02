@@ -3,6 +3,8 @@ import Aux from '../../hoc/Auxiliary';
 import Burger from '../../components/Burger/Burger';
 import Controls from '../../components/Burger/Controls/Controls';
 
+const BASE_PRICE = 4;
+
 const PRICES = {
   salad: 0.5,
   bacon: 0.7,
@@ -18,7 +20,8 @@ class BurgerBuilder extends Component {
       cheese: 0,
       meat: 0
     },
-    price: 4
+    price: BASE_PRICE,
+    purchasable: false
   }
 
   addIngredient = type => {
@@ -43,12 +46,18 @@ class BurgerBuilder extends Component {
         ...this.state.ingredients,
         [type]: amount
       },
-      price
-    }
+      price,
+      purchasable: price > BASE_PRICE
+    };
     this.setState(newState);
   }
 
   render () {
+    const disableControls = { ...this.state.ingredients };
+    for (let ingredient in disableControls) {
+      disableControls[ingredient] = disableControls[ingredient] === 0;
+    }
+
     return (
       <Aux>
         <Burger ingredients={this.state.ingredients} />
@@ -57,6 +66,8 @@ class BurgerBuilder extends Component {
           ingredients={{ ...this.state.ingredients }}
           onAddIngredient={this.addIngredient}
           onRemoveIngredient={this.removeIngredient}
+          disableControls={disableControls}
+          purchasable={this.state.purchasable}
         />
       </Aux>
     );

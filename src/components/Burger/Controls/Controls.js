@@ -16,11 +16,17 @@ const controls = props => (
       <Control
         key={control.label}
         label={control.label}
-        disabled={!props.ingredients[control.type]}
+        disabled={props.disableControls[control.type]}
         onAdd={_ => props.onAddIngredient(control.type)}
         onRemove={_ => props.onRemoveIngredient(control.type)}
       />
     ))}
+    <button
+      className={classes.OrderButton}
+      disabled={!props.purchasable}
+    >
+      ORDER NOW
+    </button>
   </div>
 );
 
