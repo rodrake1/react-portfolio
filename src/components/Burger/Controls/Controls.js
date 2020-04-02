@@ -2,7 +2,7 @@ import React from 'react';
 import Control from './Control/Control';
 import classes from './Controls.module.css';
 
-const initialControls = [
+const buildControls = [
   { label: 'Salad', type: 'salad' },
   { label: 'Bacon', type: 'bacon' },
   { label: 'Cheese', type: 'cheese' },
@@ -11,7 +11,8 @@ const initialControls = [
 
 const controls = props => (
   <div className={classes.Controls}>
-    {initialControls.map(control => (
+    <p>Current price: <strong>{props.price.toFixed(2)}</strong></p>
+    {buildControls.map(control => (
       <Control
         key={control.label}
         label={control.label}
