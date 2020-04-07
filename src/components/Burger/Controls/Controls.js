@@ -16,9 +16,9 @@ const controls = props => (
       <Control
         key={control.label}
         label={control.label}
-        disabled={props.disableControls[control.type]}
-        onAdd={() => props.onAddIngredient(control.type)}
-        onRemove={() => props.onRemoveIngredient(control.type)}
+        disabled={props.controlsStatus[control.type]}
+        onAdd={() => props.onIngredientAdd(control.type)}
+        onRemove={() => props.onIngredientRemove(control.type)}
       />
     ))}
     <button

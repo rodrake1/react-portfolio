@@ -27,19 +27,27 @@ class BurgerBuilder extends Component {
     purchasing: false
   }
 
-  addIngredient = type => {
+  handleIngredientAdd = type => {
     const amount = this.state.ingredients[type] + 1;
     const price = this.state.price + PRICES[type];
     this.updateState(type, amount, price);
   }
 
-  removeIngredient = type => {
+  handleIngredientRemove = type => {
     const canRemoveIngredient = !!this.state.ingredients[type];
     if (canRemoveIngredient) {
       const amount = this.state.ingredients[type] - 1;
       const price = this.state.price - PRICES[type];
       this.updateState(type, amount, price);
     }
+  }
+
+  handlePurchase = () => {
+    this.setState({ purchasing: true });
+  }
+
+  handlePurchaseCancel = () => {
+    this.setState({ purchasing: false });
   }
 
   updateState = (type, amount, price) => {
@@ -55,30 +63,29 @@ class BurgerBuilder extends Component {
     this.setState(newState);
   }
 
-  purchase = () => {
-    this.setState({ purchasing: true });
-  }
-
   render () {
-    const disableControls = { ...this.state.ingredients };
-    for (let ingredient in disableControls) {
-      disableControls[ingredient] = disableControls[ingredient] === 0;
+    const controlsStatus = { ...this.state.ingredients };
+    for (let ingredient in controlsStatus) {
+      controlsStatus[ingredient] = controlsStatus[ingredient] === 0;
     }
 
     return (
       <Aux>
-        <Modal show={this.state.purchasing}>
+        <Modal
+          show={this.state.purchasing}
+          onClose={this.handlePurchaseCancel}
+        >
           <Order ingredients={this.state.ingredients} />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <Controls
           price={this.state.price}
           ingredients={{ ...this.state.ingredients }}
-          onAddIngredient={this.addIngredient}
-          onRemoveIngredient={this.removeIngredient}
-          onPurchase={this.purchase}
-          disableControls={disableControls}
+          controlsStatus={controlsStatus}
           purchasable={this.state.purchasable}
+          onIngredientAdd={this.handleIngredientAdd}
+          onIngredientRemove={this.handleIngredientRemove}
+          onPurchase={this.handlePurchase}
         />
       </Aux>
     );
