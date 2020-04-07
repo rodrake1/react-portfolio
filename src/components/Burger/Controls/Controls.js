@@ -17,13 +17,14 @@ const controls = props => (
         key={control.label}
         label={control.label}
         disabled={props.disableControls[control.type]}
-        onAdd={_ => props.onAddIngredient(control.type)}
-        onRemove={_ => props.onRemoveIngredient(control.type)}
+        onAdd={() => props.onAddIngredient(control.type)}
+        onRemove={() => props.onRemoveIngredient(control.type)}
       />
     ))}
     <button
       className={classes.OrderButton}
       disabled={!props.purchasable}
+      onClick={props.onPurchase}
     >
       ORDER NOW
     </button>
