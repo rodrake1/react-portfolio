@@ -28,15 +28,15 @@ const order = props => {
       <p>Continue to Checkout?</p>
       <Button
         type='Danger'
-        onClick={props.onClose}
+        onClick={props.onPurchaseCancel}
       >
         CANCEL
       </Button>
       <Button
         type='Success'
-        onClick={props.onClose}
+        onClick={props.onPurchaseContinue}
       >
-        PURCHASE
+        CONTINUE
       </Button>
     </Aux>
   );
