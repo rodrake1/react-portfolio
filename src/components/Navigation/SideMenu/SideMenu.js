@@ -6,7 +6,9 @@ import classes from './SideMenu.module.css';
 const sideMenu = props => {
   return (
     <div className={classes.SideMenu}>
-      <Logo />
+      <div className={classes.Logo}>
+        <Logo />
+      </div>
       <nav>
         <NavigationItems />
       </nav>
