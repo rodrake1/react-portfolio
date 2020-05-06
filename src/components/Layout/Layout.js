@@ -6,7 +6,12 @@ import classes from './Layout.module.css';
 
 class Layout extends Component {
   state = {
-    showSideMenu: true
+    showSideMenu: false
+  }
+
+  handleOpenSideMenu = () => {
+    console.log('open');
+    this.setState({ showSideMenu: true });
   }
 
   handleCloseSideMenu = () => {
@@ -16,7 +21,7 @@ class Layout extends Component {
   render () {
     return (
       <Aux>
-        <Toolbar />
+        <Toolbar onOpenSideMenu={this.handleOpenSideMenu} />
         <SideMenu
           show={this.state.showSideMenu}
           onClose={this.handleCloseSideMenu}
