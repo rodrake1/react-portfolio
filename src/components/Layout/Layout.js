@@ -1,17 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Aux from '../../hoc/Auxiliary';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
 import SideMenu from '../Navigation/SideMenu/SideMenu';
 import classes from './Layout.module.css';
 
-const layout = props => (
-  <Aux>
-    <Toolbar />
-    <SideMenu />
-    <main className={classes.Content}>
-      {props.children}
-    </main>
-  </Aux>
-);
+class Layout extends Component {
+  state = {
+    showSideMenu: true
+  }
 
-export default layout;
+  handleCloseSideMenu = () => {
+    this.setState({ showSideMenu: false });
+  }
+
+  render () {
+    return (
+      <Aux>
+        <Toolbar />
+        <SideMenu
+          show={this.state.showSideMenu}
+          onClose={this.handleCloseSideMenu}
+        />
+        <main className={classes.Content}>
+          {this.props.children}
+        </main>
+      </Aux>
+    );
+  }
+}
+
+export default Layout;
